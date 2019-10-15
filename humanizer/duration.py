@@ -168,7 +168,7 @@ class DurationHumanizer(Humanizer):
             result = duration_value_unit_pattern and duration_value_unit_pattern.groups()
 
             if result is None or len(result) <= 0:
-                raise MarkableDataHumanizerError(
+                raise HumanizerError(
                     'Expected valid number (`<value:int|float>`) or string (`"<value:int|float> <unit:string>"`) but got value `{0}` ({1})'.format(value, type(value)
                 ), details = {
                     'value': value,
@@ -195,7 +195,7 @@ class DurationHumanizer(Humanizer):
             return _seconds
 
         except Exception as error:
-            raise MarkableDataHumanizerError(error, details = {
+            raise HumanizerError(error, details = {
                 'value': value,
             })
 
@@ -240,12 +240,12 @@ class DurationHumanizer(Humanizer):
                 _value = _value / _unit_duration
 
             if _value < 0:
-                raise MarkableDataHumanizerError('Expected `value >= 0`, but was `{0}`'.format(_value), details = {
+                raise HumanizerError('Expected `value >= 0`, but was `{0}`'.format(_value), details = {
                     'value': _value,
                 })
 
             if _value >= float('inf'):
-                raise MarkableDataHumanizerError('Expected `value < ∞`, but was `{0}`'.format(_value), details = {
+                raise HumanizerError('Expected `value < ∞`, but was `{0}`'.format(_value), details = {
                     'value': _value,
                 })
 
@@ -288,7 +288,7 @@ class DurationHumanizer(Humanizer):
             return value_string
 
         except Exception as error:
-            raise MarkableDataHumanizerError(error, details = {
+            raise HumanizerError(error, details = {
                 'value': value,
             })
 
